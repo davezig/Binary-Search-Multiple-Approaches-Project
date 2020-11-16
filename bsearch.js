@@ -15,22 +15,41 @@ targetNum is within the nums array.
 *******************************************************************/
 
 const recurBSearch = (nums, targetNum) => {
-  // if nums has no length, return false because we've run out of items to
-  // search and haven't found targetNum
+  if (nums.length === 0) {
+    return false;
+  }
+  
+  let mid = Math.floor(nums.length / 2);
+  console.log("mid", mid)
+  
+  let rightHalf = nums.slice(mid + 1);
+  console.log("rightHalf", rightHalf)
+  let leftHalf = nums.slice(0, mid);
+  console.log("leftHalf", leftHalf)
+  
+  if (targetNum < nums[mid]){
+    return recurBSearch(leftHalf, targetNum)
+  }
 
-  // determine the slice point
+  else if (targetNum > nums[mid]){
+    return recurBSearch(rightHalf, targetNum)
+  }
 
-  // create "left half" and "right half" arrays
-
-  // if targetNum is less than the slice point, return this search on the left
-  // half
-
-  // if targetNum is greater than the slice point, return this search on the
-  // right half
-
-  // if it's not greater than or less than, we know it's equal so return true
+  else {
+    return true;
+  }
+  // return false;
 }
 
+
+let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+
+let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+// recurBSearch(arr1, 8)
+console.log("recurBSearch(arr1, 8)", recurBSearch(arr1, 10))
 
 /*******************************************************************
 BINARY SEARCH VERSION 2:
