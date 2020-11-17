@@ -42,14 +42,14 @@ const recurBSearch = (nums, targetNum) => {
 }
 
 
-let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 
-let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-// recurBSearch(arr1, 8)
-console.log("recurBSearch(arr1, 8)", recurBSearch(arr1, 10))
+// // recurBSearch(arr1, 8)
+// console.log("recurBSearch(arr1, 8)", recurBSearch(arr1, 10))
 
 /*******************************************************************
 BINARY SEARCH VERSION 2:
@@ -61,26 +61,50 @@ targetNum is within the nums array.
 const iterBSearch = (nums, targetNum) => {
   // Save references to the beginning, middle, and end of the array into
   // variables: lowerIdx, midIdx, and upperIdx
+  let lowerIdx = 0
+  let midIdx 
+  let upperIdx = nums.length
 
   // while the lowerIdx is less than or equal to the upperIdx, there are still
   // values to be searched
+  for(let i = lowerIdx; i <= upperIdx; i++){
+    // reassign the midIdx to the the middle of the new lower and upper indices 
+    midIdx = Math.floor((lowerIdx + upperIdx) / 2)
 
-  // reassign the midIdx to the the middle of the new lower and upper indices 
 
   // if targetNum is larger than the value in the middle, we know targetNum is
   // not between the current lower and current middle, so raise the lowerIdx
   // value
+    if(targetNum > nums[midIdx]){
+      lowerIdx = midIdx + 1
+    }
 
   // if targetNum is less than the value in the middle, we know targetNum is not
   // between the current upper and current middle, so lower the upperIdx 
+    else if(targetNum < nums[midIdx]){
+      upperIdx = midIdx
+    }
 
   // if it's not greater than or less than, we have found our target at the
   // midIdx and can return true and stop iterating.
+    //
+    else if(targetNum === nums[midIdx]) {
+      return true
+    }
+  }
 
   // if we finish iterating and haven't returned true, we've looked over the
   // entire array and didn't find targetNum, so return false 
+  return false
 }
 
+let arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+
+let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+console.log("iterBSearch(arr1, 6)", iterBSearch(arr1, 10))
 
 /*******************************************************************
 BINARY SEARCH VERSION 3:
